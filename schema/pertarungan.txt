@@ -1,0 +1,41 @@
+
+CREATE TABLE IF NOT EXISTS Pertarungan (
+    pertarungan_id      INT         PRIMARY KEY AUTO_INCREMENT,
+    akun_id_1           INT         NOT NULL,
+    akun_id_2           INT         NOT NULL,
+    slot_deck_1         TINYINT     NOT NULL CHECK (slot_deck_1 BETWEEN 1 AND 5),
+    slot_deck_2         TINYINT     NOT NULL CHECK (slot_deck_2 BETWEEN 1 AND 5),
+    arena_id            INT         NOT NULL,
+    akun_id_pemenang    INT         NOT NULL,
+    waktu_mulai         DATETIME    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    replay_path         VARCHAR(255) NULL,
+
+    -- Dua pemain tidak boleh sama
+    CONSTRAINT chk_beda_pemain CHECK (akun_id_1 <> akun_id_2),
+
+    -- Pemenang harus salah satu dari dua pemain yang bertanding
+    CONSTRAINT chk_pemenang_valid CHECK (
+        akun_id_pemenang = akun_id_1 OR
+        akun_id_pemenang = akun_id_2
+    ),
+
+    FOREIGN KEY (akun_id_1, slot_deck_1)
+        REFERENCES Deck(akun_id, slot_deck)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE,
+
+    FOREIGN KEY (akun_id_2, slot_deck_2)
+        REFERENCES Deck(akun_id, slot_deck)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE,
+
+    FOREIGN KEY (arena_id)
+        REFERENCES Arena(arena_id)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE,
+
+    FOREIGN KEY (akun_id_pemenang)
+        REFERENCES Akun(akun_id)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE
+);
