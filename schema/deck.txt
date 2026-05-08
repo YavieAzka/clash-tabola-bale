@@ -1,0 +1,41 @@
+
+
+-- Tabel Deck
+CREATE TABLE IF NOT EXISTS Deck (
+    akun_id         INT             NOT NULL,
+    slot_deck       TINYINT         NOT NULL CHECK (slot_deck BETWEEN 1 AND 5),
+    nama_deck       VARCHAR(100)    NOT NULL,
+    is_active       BOOLEAN         NOT NULL DEFAULT FALSE,
+    PRIMARY KEY (akun_id, slot_deck),
+    FOREIGN KEY (akun_id) REFERENCES Akun(akun_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+-- Constraint: hanya boleh 1 deck aktif per akun
+-- MariaDB tidak mendukung partial unique index secara langsung,
+DELIMITER $$
+
+CREATE TRIGGER trg_deck_satu_aktif_insert
+BEFORE INSERT ON Deck
+FOR EACH ROW
+BEGIN
+    IF NEW.is_active = TRUE THEN
+        UPDATE Deck
+        SET is_active = FALSE
+        WHERE akun_id = NEW.akun_id AND is_active = TRUE;
+    END IF;
+END$$
+
+CREATE TRIGGER trg_deck_satu_aktif_update
+BEFORE UPDATE ON Deck
+FOR EACH ROW
+BEGIN
+    IF NEW.is_active = TRUE AND OLD.is_active = FALSE THEN
+        UPDATE Deck
+        SET is_active = FALSE
+        WHERE akun_id = NEW.akun_id AND is_active = TRUE;
+    END IF;
+END$$
+
+DELIMITER ;
