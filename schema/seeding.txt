@@ -2765,5 +2765,56 @@ INSERT INTO BerbagiReplay (klan_id, urutan, deskripsi_tambahan, pertarungan_id) 
   (9, 34, 'Pertarungan seru banget!', 99),
   (11, 16, 'Deck aku OP banget di match ini.', 100);
 
+
+-- tambahan tabel Sihir
+
+
+-- Insert ke tabel Kartu
+INSERT INTO Kartu (kartu_id, nama, deskripsi, tipe, damage, elixir, nama_rarity, arena_id_unlocked) VALUES
+  (151, 'Golden Flare', 'Kartu sihir dengan daya serang tinggi.', 'sihir', 466, 4, 'Mythic', 5),
+  (152, 'Thunder Inferno', 'Kartu sihir dengan daya serang tinggi.', 'sihir', 884, 9, 'Blaze', 3),
+  (153, 'Frost Zap', 'Kartu sihir dengan daya serang tinggi.', 'sihir', 963, 10, 'Nature', 7),
+  (154, 'Void Cascade', 'Kartu sihir dengan daya serang tinggi.', 'sihir', 894, 4, 'Champion', 15),
+  (155, 'Solar Blizzard', 'Kartu sihir dengan daya serang tinggi.', 'sihir', 269, 9, 'Epic', 16),
+  (156, 'Ice Tornado', 'Kartu sihir dengan daya serang tinggi.', 'sihir', 1242, 1, 'Infernal', 7),
+  (157, 'Phantom Arrows', 'Kartu sihir dengan daya serang tinggi.', 'sihir', 1046, 9, 'SuperRare', 20),
+  (158, 'Ice Meteor', 'Kartu sihir dengan daya serang tinggi.', 'sihir', 364, 4, 'Ultra', 15),
+  (159, 'Iron Blast', 'Kartu sihir dengan daya serang tinggi.', 'sihir', 1452, 3, 'Rare', 4),
+  (160, 'Frost Vortex', 'Kartu sihir dengan daya serang tinggi.', 'sihir', 958, 2, 'Infernal', 21),
+  (161, 'Crystal Flare', 'Kartu sihir dengan daya serang tinggi.', 'sihir', 111, 7, 'Void', 5),
+  (162, 'Golden Maelstrom', 'Kartu sihir dengan daya serang tinggi.', 'sihir', 213, 4, 'Storm', 9),
+  (163, 'Swift Meteor', 'Kartu sihir dengan daya serang tinggi.', 'sihir', 1075, 1, 'Champion', 20),
+  (164, 'Swift Flare', 'Kartu sihir dengan daya serang tinggi.', 'sihir', 936, 2, 'Legendary', 4),
+  (165, 'Storm Freeze', 'Kartu sihir dengan daya serang tinggi.', 'sihir', 525, 9, 'Void', 16),
+  (166, 'Thunder Poison', 'Kartu sihir dengan daya serang tinggi.', 'sihir', 840, 3, 'Epic', 17),
+  (167, 'Solar Cascade', 'Kartu sihir dengan daya serang tinggi.', 'sihir', 197, 6, 'SuperRare', 13),
+  (168, 'Storm Cascade', 'Kartu sihir dengan daya serang tinggi.', 'sihir', 859, 9, 'Epic', 6),
+  (169, 'Void Inferno', 'Kartu sihir dengan daya serang tinggi.', 'sihir', 916, 8, 'Mythic', 10),
+  (170, 'Shadow Surge', 'Kartu sihir dengan daya serang tinggi.', 'sihir', 736, 2, 'Void', 7);
+
+-- Insert ke tabel Sihir
+INSERT INTO Sihir (kartu_id, radius_serangan) VALUES
+  (151, 6.32),
+  (152, 7.57),
+  (153, 6.55),
+  (154, 5.62),
+  (155, 3.21),
+  (156, 3.54),
+  (157, 4.24),
+  (158, 5.17),
+  (159, 1.16),
+  (160, 1.6),
+  (161, 4.66),
+  (162, 4.82),
+  (163, 6.45),
+  (164, 2.01),
+  (165, 6.59),
+  (166, 3.01),
+  (167, 3.79),
+  (168, 7.16),
+  (169, 6.98),
+  (170, 6.35);
+
+
 SET FOREIGN_KEY_CHECKS = 1;
 
