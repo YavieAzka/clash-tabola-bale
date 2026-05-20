@@ -1,7 +1,7 @@
 /*M!999999\- enable the sandbox mode */ 
--- MariaDB dump 10.19-12.2.2-MariaDB, for osx10.21 (arm64)
+-- MariaDB dump 10.19-12.2.2-MariaDB, for Win64 (AMD64)
 --
--- Host: localhost    Database: ms3
+-- Host: localhost    Database: nos
 -- ------------------------------------------------------
 -- Server version	12.2.2-MariaDB
 
@@ -15,145 +15,6 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*M!100616 SET @OLD_NOTE_VERBOSITY=@@NOTE_VERBOSITY, NOTE_VERBOSITY=0 */;
-
---
--- Table structure for table `Arena`
---
-
-DROP TABLE IF EXISTS `Arena`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Arena` (
-  `arena_id` int(11) NOT NULL AUTO_INCREMENT,
-  `nama_arena` varchar(100) NOT NULL,
-  `piala_dibutuhkan` int(11) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`arena_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Arena`
---
-
-SET @OLD_AUTOCOMMIT=@@AUTOCOMMIT, @@AUTOCOMMIT=0;
-LOCK TABLES `Arena` WRITE;
-/*!40000 ALTER TABLE `Arena` DISABLE KEYS */;
-INSERT INTO `Arena` VALUES
-(1,'Goblin Stadium',0),
-(2,'Bone Pit',400),
-(3,'Barbarian Bowl',800),
-(4,'P.E.K.K.A\'s Playhouse',1100),
-(5,'Spell Valley',1400),
-(6,'Builder\'s Workshop',1700),
-(7,'Royal Arena',2000),
-(8,'Frozen Peak',2300),
-(9,'Jungle Arena',2600),
-(10,'Hog Mountain',3000),
-(11,'Electro Valley',3400),
-(12,'Master I',4000),
-(13,'Master II',4300),
-(14,'Master III',4600),
-(15,'Champion',5000),
-(16,'Grand Champion',6000),
-(17,'Royal Champion',7000),
-(18,'Ultimate Champion',8000),
-(19,'Titan League',9000),
-(20,'Legend League',10000),
-(21,'Legendary Arena',12000);
-/*!40000 ALTER TABLE `Arena` ENABLE KEYS */;
-UNLOCK TABLES;
-COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
-
---
--- Table structure for table `Klan`
---
-
-DROP TABLE IF EXISTS `Klan`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Klan` (
-  `klan_id` int(11) NOT NULL AUTO_INCREMENT,
-  `nama_klan` varchar(100) NOT NULL,
-  `negara_asal` varchar(100) DEFAULT NULL,
-  `piala_dibutuhkan` int(11) DEFAULT 0,
-  `deskripsi` text DEFAULT NULL,
-  `tipe` enum('Public','Private') DEFAULT 'Public',
-  PRIMARY KEY (`klan_id`),
-  CONSTRAINT `chk_piala_klan` CHECK (`piala_dibutuhkan` >= 0)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Klan`
---
-
-SET @OLD_AUTOCOMMIT=@@AUTOCOMMIT, @@AUTOCOMMIT=0;
-LOCK TABLES `Klan` WRITE;
-/*!40000 ALTER TABLE `Klan` DISABLE KEYS */;
-INSERT INTO `Klan` VALUES
-(1,'Dragon Fire','Indonesia',0,'Klan kompetitif untuk pemain berpengalaman.','Public'),
-(2,'Shadow Knights','Malaysia',200,'Bergabunglah dan raih kejayaan bersama!','Public'),
-(3,'Ice Wolves','Singapore',500,'Klan santai namun aktif bermain setiap hari.','Private'),
-(4,'Thunder Clan','Thailand',800,'Kami mencari anggota yang dedikasi tinggi.','Public'),
-(5,'Phantom Force','Philippines',1200,'Klan terbuka untuk semua level pemain.','Public'),
-(6,'Steel Titans','Vietnam',1500,'Elite clan, invitation only.','Public'),
-(7,'Golden Eagles','Japan',2000,'Fokus pada strategi dan kerja sama tim.','Public'),
-(8,'Crimson Tide','South Korea',2500,'Fun clan for casual players.','Public'),
-(9,'Silver Serpents','Brazil',3000,'Klan legendaris dengan sejarah panjang.','Private'),
-(10,'Neon Warriors','USA',3500,'Kami adalah yang terkuat di region ini.','Public'),
-(11,'Eternal Frost','Germany',4000,'Klan kompetitif untuk pemain berpengalaman.','Public'),
-(12,'Blazing Stars','France',4500,'Bergabunglah dan raih kejayaan bersama!','Public'),
-(13,'Storm Riders','Australia',5000,'Klan santai namun aktif bermain setiap hari.','Public'),
-(14,'Dark Phoenix','India',5500,'Kami mencari anggota yang dedikasi tinggi.','Public'),
-(15,'Iron Legion','Mexico',6000,'Klan terbuka untuk semua level pemain.','Public'),
-(16,'Crystal Vanguard','Argentina',6500,'Elite clan, invitation only.','Public'),
-(17,'Solar Flare','Netherlands',7000,'Fokus pada strategi dan kerja sama tim.','Private'),
-(18,'Lunar Pack','Sweden',7500,'Fun clan for casual players.','Public'),
-(19,'Void Hunters','Canada',8000,'Klan legendaris dengan sejarah panjang.','Private'),
-(20,'Nebula Squad','UK',9000,'Kami adalah yang terkuat di region ini.','Private'),
-(21,'Apex Predators','Indonesia',10000,'Klan kompetitif untuk pemain berpengalaman.','Public'),
-(22,'Rogue Alliance','Malaysia',12000,'Bergabunglah dan raih kejayaan bersama!','Public');
-/*!40000 ALTER TABLE `Klan` ENABLE KEYS */;
-UNLOCK TABLES;
-COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
-
---
--- Table structure for table `Rarity`
---
-
-DROP TABLE IF EXISTS `Rarity`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Rarity` (
-  `nama_rarity` varchar(50) NOT NULL,
-  `max_terima_donasi` int(11) NOT NULL,
-  `jumlah_untuk_upgrade` int(11) NOT NULL,
-  `gold_dibutuhkan` int(11) NOT NULL,
-  `qty_jual` int(11) NOT NULL,
-  `harga_toko` int(11) NOT NULL,
-  PRIMARY KEY (`nama_rarity`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Rarity`
---
-
-SET @OLD_AUTOCOMMIT=@@AUTOCOMMIT, @@AUTOCOMMIT=0;
-LOCK TABLES `Rarity` WRITE;
-/*!40000 ALTER TABLE `Rarity` DISABLE KEYS */;
-INSERT INTO `Rarity` VALUES
-('common',100,50,5,40,200),
-('epic',40,10,30,2,800),
-('legendary',20,5,50,1,1200),
-('rare',60,20,20,5,500),
-('uncommon',80,30,10,15,300);
-/*!40000 ALTER TABLE `Rarity` ENABLE KEYS */;
-UNLOCK TABLES;
-COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
 
 --
 -- Table structure for table `akun`
@@ -176,10 +37,10 @@ CREATE TABLE `akun` (
   PRIMARY KEY (`akun_id`),
   UNIQUE KEY `username` (`username`),
   KEY `fk_akun_klan` (`klan_id`),
-  CONSTRAINT `fk_akun_klan` FOREIGN KEY (`klan_id`) REFERENCES `Klan` (`klan_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `fk_akun_klan` FOREIGN KEY (`klan_id`) REFERENCES `klan` (`klan_id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `chk_jumlah_emas` CHECK (`jumlah_emas` >= 0),
   CONSTRAINT `chk_jumlah_piala` CHECK (`jumlah_piala` >= 0)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -342,6 +203,55 @@ SET character_set_client = utf8mb4;
 SET character_set_client = @saved_cs_client;
 
 --
+-- Table structure for table `arena`
+--
+
+DROP TABLE IF EXISTS `arena`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `arena` (
+  `arena_id` int(11) NOT NULL AUTO_INCREMENT,
+  `nama_arena` varchar(100) NOT NULL,
+  `piala_dibutuhkan` int(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`arena_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `arena`
+--
+
+SET @OLD_AUTOCOMMIT=@@AUTOCOMMIT, @@AUTOCOMMIT=0;
+LOCK TABLES `arena` WRITE;
+/*!40000 ALTER TABLE `arena` DISABLE KEYS */;
+INSERT INTO `arena` VALUES
+(1,'Goblin Stadium',0),
+(2,'Bone Pit',400),
+(3,'Barbarian Bowl',800),
+(4,'P.E.K.K.A\'s Playhouse',1100),
+(5,'Spell Valley',1400),
+(6,'Builder\'s Workshop',1700),
+(7,'Royal Arena',2000),
+(8,'Frozen Peak',2300),
+(9,'Jungle Arena',2600),
+(10,'Hog Mountain',3000),
+(11,'Electro Valley',3400),
+(12,'Master I',4000),
+(13,'Master II',4300),
+(14,'Master III',4600),
+(15,'Champion',5000),
+(16,'Grand Champion',6000),
+(17,'Royal Champion',7000),
+(18,'Ultimate Champion',8000),
+(19,'Titan League',9000),
+(20,'Legend League',10000),
+(21,'Legendary Arena',12000);
+/*!40000 ALTER TABLE `arena` ENABLE KEYS */;
+UNLOCK TABLES;
+COMMIT;
+SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+
+--
 -- Table structure for table `bangunan`
 --
 
@@ -356,8 +266,8 @@ CREATE TABLE `bangunan` (
   `jarak_serangan` int(11) DEFAULT NULL,
   `kecepatan_menyerang` decimal(5,2) DEFAULT NULL,
   PRIMARY KEY (`kartu_id`),
-  CONSTRAINT `fk_bangunan_kartu` FOREIGN KEY (`kartu_id`) REFERENCES `Kartu` (`kartu_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  CONSTRAINT `fk_bangunan_kartu` FOREIGN KEY (`kartu_id`) REFERENCES `kartu` (`kartu_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -447,9 +357,9 @@ CREATE TABLE `berbagireplay` (
   `pertarungan_id` int(11) NOT NULL,
   PRIMARY KEY (`klan_id`,`urutan`),
   KEY `fk_berbagireplay_pertarungan` (`pertarungan_id`),
-  CONSTRAINT `fk_berbagireplay_chat` FOREIGN KEY (`klan_id`, `urutan`) REFERENCES `Chat` (`klan_id`, `urutan`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_berbagireplay_pertarungan` FOREIGN KEY (`pertarungan_id`) REFERENCES `Pertarungan` (`pertarungan_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  CONSTRAINT `fk_berbagireplay_chat` FOREIGN KEY (`klan_id`, `urutan`) REFERENCES `chat` (`klan_id`, `urutan`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_berbagireplay_pertarungan` FOREIGN KEY (`pertarungan_id`) REFERENCES `pertarungan` (`pertarungan_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -579,9 +489,9 @@ CREATE TABLE `chat` (
   `akun_id_pengirim` int(11) NOT NULL,
   PRIMARY KEY (`klan_id`,`urutan`),
   KEY `fk_chat_akun` (`akun_id_pengirim`),
-  CONSTRAINT `fk_chat_akun` FOREIGN KEY (`akun_id_pengirim`) REFERENCES `Akun` (`akun_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_chat_klan` FOREIGN KEY (`klan_id`) REFERENCES `Klan` (`klan_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  CONSTRAINT `fk_chat_akun` FOREIGN KEY (`akun_id_pengirim`) REFERENCES `akun` (`akun_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_chat_klan` FOREIGN KEY (`klan_id`) REFERENCES `klan` (`klan_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -876,9 +786,9 @@ CREATE TABLE `deck` (
   `nomor_slot` tinyint(4) NOT NULL,
   `status_aktif` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`akun_id`,`nomor_slot`),
-  CONSTRAINT `fk_deck_akun` FOREIGN KEY (`akun_id`) REFERENCES `Akun` (`akun_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_deck_akun` FOREIGN KEY (`akun_id`) REFERENCES `akun` (`akun_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `chk_nomor_slot_deck` CHECK (`nomor_slot` between 1 and 5)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1218,10 +1128,10 @@ CREATE TABLE `kartu` (
   PRIMARY KEY (`kartu_id`),
   KEY `fk_kartu_arena` (`arena_id_unlocked`),
   KEY `fk_kartu_rarity` (`nama_rarity`),
-  CONSTRAINT `fk_kartu_arena` FOREIGN KEY (`arena_id_unlocked`) REFERENCES `Arena` (`arena_id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `fk_kartu_rarity` FOREIGN KEY (`nama_rarity`) REFERENCES `Rarity` (`nama_rarity`) ON UPDATE CASCADE,
+  CONSTRAINT `fk_kartu_arena` FOREIGN KEY (`arena_id_unlocked`) REFERENCES `arena` (`arena_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `fk_kartu_rarity` FOREIGN KEY (`nama_rarity`) REFERENCES `rarity` (`nama_rarity`) ON UPDATE CASCADE,
   CONSTRAINT `chk_elixir_kartu` CHECK (`elixir` between 1 and 10)
-) ENGINE=InnoDB AUTO_INCREMENT=171 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=171 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1420,9 +1330,9 @@ CREATE TABLE `kartudeck` (
   `kartu_id` int(11) NOT NULL,
   PRIMARY KEY (`akun_id`,`nomor_slot`,`kartu_id`),
   KEY `fk_kartudeck_kartu` (`kartu_id`),
-  CONSTRAINT `fk_kartudeck_deck` FOREIGN KEY (`akun_id`, `nomor_slot`) REFERENCES `Deck` (`akun_id`, `nomor_slot`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_kartudeck_kartu` FOREIGN KEY (`kartu_id`) REFERENCES `Kartu` (`kartu_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  CONSTRAINT `fk_kartudeck_deck` FOREIGN KEY (`akun_id`, `nomor_slot`) REFERENCES `deck` (`akun_id`, `nomor_slot`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_kartudeck_kartu` FOREIGN KEY (`kartu_id`) REFERENCES `kartu` (`kartu_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2440,6 +2350,60 @@ DELIMITER ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
+-- Table structure for table `klan`
+--
+
+DROP TABLE IF EXISTS `klan`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `klan` (
+  `klan_id` int(11) NOT NULL AUTO_INCREMENT,
+  `nama_klan` varchar(100) NOT NULL,
+  `negara_asal` varchar(100) DEFAULT NULL,
+  `piala_dibutuhkan` int(11) DEFAULT 0,
+  `deskripsi` text DEFAULT NULL,
+  `tipe` enum('Public','Private') DEFAULT 'Public',
+  PRIMARY KEY (`klan_id`),
+  CONSTRAINT `chk_piala_klan` CHECK (`piala_dibutuhkan` >= 0)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `klan`
+--
+
+SET @OLD_AUTOCOMMIT=@@AUTOCOMMIT, @@AUTOCOMMIT=0;
+LOCK TABLES `klan` WRITE;
+/*!40000 ALTER TABLE `klan` DISABLE KEYS */;
+INSERT INTO `klan` VALUES
+(1,'Dragon Fire','Indonesia',0,'Klan kompetitif untuk pemain berpengalaman.','Public'),
+(2,'Shadow Knights','Malaysia',200,'Bergabunglah dan raih kejayaan bersama!','Public'),
+(3,'Ice Wolves','Singapore',500,'Klan santai namun aktif bermain setiap hari.','Private'),
+(4,'Thunder Clan','Thailand',800,'Kami mencari anggota yang dedikasi tinggi.','Public'),
+(5,'Phantom Force','Philippines',1200,'Klan terbuka untuk semua level pemain.','Public'),
+(6,'Steel Titans','Vietnam',1500,'Elite clan, invitation only.','Public'),
+(7,'Golden Eagles','Japan',2000,'Fokus pada strategi dan kerja sama tim.','Public'),
+(8,'Crimson Tide','South Korea',2500,'Fun clan for casual players.','Public'),
+(9,'Silver Serpents','Brazil',3000,'Klan legendaris dengan sejarah panjang.','Private'),
+(10,'Neon Warriors','USA',3500,'Kami adalah yang terkuat di region ini.','Public'),
+(11,'Eternal Frost','Germany',4000,'Klan kompetitif untuk pemain berpengalaman.','Public'),
+(12,'Blazing Stars','France',4500,'Bergabunglah dan raih kejayaan bersama!','Public'),
+(13,'Storm Riders','Australia',5000,'Klan santai namun aktif bermain setiap hari.','Public'),
+(14,'Dark Phoenix','India',5500,'Kami mencari anggota yang dedikasi tinggi.','Public'),
+(15,'Iron Legion','Mexico',6000,'Klan terbuka untuk semua level pemain.','Public'),
+(16,'Crystal Vanguard','Argentina',6500,'Elite clan, invitation only.','Public'),
+(17,'Solar Flare','Netherlands',7000,'Fokus pada strategi dan kerja sama tim.','Private'),
+(18,'Lunar Pack','Sweden',7500,'Fun clan for casual players.','Public'),
+(19,'Void Hunters','Canada',8000,'Klan legendaris dengan sejarah panjang.','Private'),
+(20,'Nebula Squad','UK',9000,'Kami adalah yang terkuat di region ini.','Private'),
+(21,'Apex Predators','Indonesia',10000,'Klan kompetitif untuk pemain berpengalaman.','Public'),
+(22,'Rogue Alliance','Malaysia',12000,'Bergabunglah dan raih kejayaan bersama!','Public');
+/*!40000 ALTER TABLE `klan` ENABLE KEYS */;
+UNLOCK TABLES;
+COMMIT;
+SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+
+--
 -- Table structure for table `koleksikartu`
 --
 
@@ -2453,10 +2417,10 @@ CREATE TABLE `koleksikartu` (
   `jumlah_kartu` int(11) DEFAULT 0,
   PRIMARY KEY (`akun_id`,`kartu_id`),
   KEY `fk_koleksikartu_kartu` (`kartu_id`),
-  CONSTRAINT `fk_koleksikartu_akun` FOREIGN KEY (`akun_id`) REFERENCES `Akun` (`akun_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_koleksikartu_kartu` FOREIGN KEY (`kartu_id`) REFERENCES `Kartu` (`kartu_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_koleksikartu_akun` FOREIGN KEY (`akun_id`) REFERENCES `akun` (`akun_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_koleksikartu_kartu` FOREIGN KEY (`kartu_id`) REFERENCES `kartu` (`kartu_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `chk_level_kartu` CHECK (`level` >= 1)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2963,8 +2927,8 @@ CREATE TABLE `pasukan` (
   `kecepatan_menyerang` decimal(5,2) DEFAULT NULL,
   `tipe_pasukan` enum('darat','udara') NOT NULL,
   PRIMARY KEY (`kartu_id`),
-  CONSTRAINT `fk_pasukan_kartu` FOREIGN KEY (`kartu_id`) REFERENCES `Kartu` (`kartu_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  CONSTRAINT `fk_pasukan_kartu` FOREIGN KEY (`kartu_id`) REFERENCES `kartu` (`kartu_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3054,10 +3018,10 @@ CREATE TABLE `permintaandonasi` (
   `kartu_id` int(11) NOT NULL,
   PRIMARY KEY (`klan_id`,`urutan`),
   KEY `fk_permintaandonasi_kartu` (`kartu_id`),
-  CONSTRAINT `fk_permintaandonasi_chat` FOREIGN KEY (`klan_id`, `urutan`) REFERENCES `Chat` (`klan_id`, `urutan`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_permintaandonasi_kartu` FOREIGN KEY (`kartu_id`) REFERENCES `Kartu` (`kartu_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_permintaandonasi_chat` FOREIGN KEY (`klan_id`, `urutan`) REFERENCES `chat` (`klan_id`, `urutan`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_permintaandonasi_kartu` FOREIGN KEY (`kartu_id`) REFERENCES `kartu` (`kartu_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `chk_jml_donasi` CHECK (`jumlah_kartu_diterima` >= 0)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3253,15 +3217,15 @@ CREATE TABLE `pertarungan` (
   KEY `fk_pertarungan_arena` (`arena_id`),
   KEY `fk_pertarungan_deck1` (`akun1_id`,`nomor_slot_akun1`),
   KEY `fk_pertarungan_deck2` (`akun2_id`,`nomor_slot_akun2`),
-  CONSTRAINT `fk_pertarungan_akun1` FOREIGN KEY (`akun1_id`) REFERENCES `Akun` (`akun_id`),
-  CONSTRAINT `fk_pertarungan_akun2` FOREIGN KEY (`akun2_id`) REFERENCES `Akun` (`akun_id`),
-  CONSTRAINT `fk_pertarungan_akunpemenang` FOREIGN KEY (`pemenang_id`) REFERENCES `Akun` (`akun_id`),
-  CONSTRAINT `fk_pertarungan_arena` FOREIGN KEY (`arena_id`) REFERENCES `Arena` (`arena_id`),
-  CONSTRAINT `fk_pertarungan_deck1` FOREIGN KEY (`akun1_id`, `nomor_slot_akun1`) REFERENCES `Deck` (`akun_id`, `nomor_slot`),
-  CONSTRAINT `fk_pertarungan_deck2` FOREIGN KEY (`akun2_id`, `nomor_slot_akun2`) REFERENCES `Deck` (`akun_id`, `nomor_slot`),
+  CONSTRAINT `fk_pertarungan_akun1` FOREIGN KEY (`akun1_id`) REFERENCES `akun` (`akun_id`),
+  CONSTRAINT `fk_pertarungan_akun2` FOREIGN KEY (`akun2_id`) REFERENCES `akun` (`akun_id`),
+  CONSTRAINT `fk_pertarungan_akunpemenang` FOREIGN KEY (`pemenang_id`) REFERENCES `akun` (`akun_id`),
+  CONSTRAINT `fk_pertarungan_arena` FOREIGN KEY (`arena_id`) REFERENCES `arena` (`arena_id`),
+  CONSTRAINT `fk_pertarungan_deck1` FOREIGN KEY (`akun1_id`, `nomor_slot_akun1`) REFERENCES `deck` (`akun_id`, `nomor_slot`),
+  CONSTRAINT `fk_pertarungan_deck2` FOREIGN KEY (`akun2_id`, `nomor_slot_akun2`) REFERENCES `deck` (`akun_id`, `nomor_slot`),
   CONSTRAINT `chk_beda_pemain` CHECK (`akun1_id` <> `akun2_id`),
   CONSTRAINT `chk_pemenang` CHECK (`pemenang_id` = `akun1_id` or `pemenang_id` = `akun2_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=301 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=301 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3736,8 +3700,8 @@ CREATE TABLE `pesanbiasa` (
   `urutan` int(11) NOT NULL,
   `pesan_teks` text NOT NULL,
   PRIMARY KEY (`klan_id`,`urutan`),
-  CONSTRAINT `fk_pesanbiasa_chat` FOREIGN KEY (`klan_id`, `urutan`) REFERENCES `Chat` (`klan_id`, `urutan`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  CONSTRAINT `fk_pesanbiasa_chat` FOREIGN KEY (`klan_id`, `urutan`) REFERENCES `chat` (`klan_id`, `urutan`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3804,6 +3768,42 @@ COMMIT;
 SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
 
 --
+-- Table structure for table `rarity`
+--
+
+DROP TABLE IF EXISTS `rarity`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `rarity` (
+  `nama_rarity` varchar(50) NOT NULL,
+  `max_terima_donasi` int(11) NOT NULL,
+  `jumlah_untuk_upgrade` int(11) NOT NULL,
+  `gold_dibutuhkan` int(11) NOT NULL,
+  `qty_jual` int(11) NOT NULL,
+  `harga_toko` int(11) NOT NULL,
+  PRIMARY KEY (`nama_rarity`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `rarity`
+--
+
+SET @OLD_AUTOCOMMIT=@@AUTOCOMMIT, @@AUTOCOMMIT=0;
+LOCK TABLES `rarity` WRITE;
+/*!40000 ALTER TABLE `rarity` DISABLE KEYS */;
+INSERT INTO `rarity` VALUES
+('common',100,50,5,40,200),
+('epic',40,10,30,2,800),
+('legendary',20,5,50,1,1200),
+('rare',60,20,20,5,500),
+('uncommon',80,30,10,15,300);
+/*!40000 ALTER TABLE `rarity` ENABLE KEYS */;
+UNLOCK TABLES;
+COMMIT;
+SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+
+--
 -- Temporary table structure for view `replaypopuler`
 --
 
@@ -3833,8 +3833,8 @@ CREATE TABLE `sihir` (
   `kartu_id` int(11) NOT NULL,
   `radius_serangan` decimal(5,2) DEFAULT NULL,
   PRIMARY KEY (`kartu_id`),
-  CONSTRAINT `fk_sihir_kartu` FOREIGN KEY (`kartu_id`) REFERENCES `Kartu` (`kartu_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  CONSTRAINT `fk_sihir_kartu` FOREIGN KEY (`kartu_id`) REFERENCES `kartu` (`kartu_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3932,7 +3932,7 @@ CREATE TABLE `toko_daily` (
   KEY `kartu_id` (`kartu_id`),
   CONSTRAINT `1` FOREIGN KEY (`akun_id`) REFERENCES `akun` (`akun_id`),
   CONSTRAINT `2` FOREIGN KEY (`kartu_id`) REFERENCES `kartu` (`kartu_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3943,370 +3943,409 @@ SET @OLD_AUTOCOMMIT=@@AUTOCOMMIT, @@AUTOCOMMIT=0;
 LOCK TABLES `toko_daily` WRITE;
 /*!40000 ALTER TABLE `toko_daily` DISABLE KEYS */;
 INSERT INTO `toko_daily` VALUES
-(1,1,68,'BELUM DIBELI'),
-(1,2,3,'BELUM DIBELI'),
-(1,3,80,'BELUM DIBELI'),
-(1,4,23,'BELUM DIBELI'),
-(1,5,4,'BELUM DIBELI'),
-(1,6,113,'BELUM DIBELI'),
-(2,1,10,'BELUM DIBELI'),
-(2,2,9,'BELUM DIBELI'),
-(2,3,15,'BELUM DIBELI'),
-(2,4,142,'BELUM DIBELI'),
-(2,5,72,'BELUM DIBELI'),
-(2,6,148,'BELUM DIBELI'),
-(3,1,68,'BELUM DIBELI'),
-(3,2,3,'BELUM DIBELI'),
-(3,3,80,'BELUM DIBELI'),
-(3,4,23,'BELUM DIBELI'),
-(3,5,4,'BELUM DIBELI'),
-(3,6,113,'BELUM DIBELI'),
-(4,1,156,'BELUM DIBELI'),
-(4,2,116,'BELUM DIBELI'),
-(4,3,32,'BELUM DIBELI'),
-(4,4,99,'BELUM DIBELI'),
-(4,5,127,'BELUM DIBELI'),
-(4,6,37,'BELUM DIBELI'),
-(5,1,170,'BELUM DIBELI'),
-(5,2,128,'BELUM DIBELI'),
-(5,3,47,'BELUM DIBELI'),
-(5,4,120,'BELUM DIBELI'),
-(5,5,7,'BELUM DIBELI'),
-(5,6,41,'BELUM DIBELI'),
-(6,1,153,'BELUM DIBELI'),
-(6,2,84,'BELUM DIBELI'),
-(6,3,30,'BELUM DIBELI'),
-(6,4,59,'BELUM DIBELI'),
-(6,5,92,'BELUM DIBELI'),
-(6,6,33,'BELUM DIBELI'),
-(7,1,108,'BELUM DIBELI'),
-(7,2,40,'BELUM DIBELI'),
-(7,3,22,'BELUM DIBELI'),
-(7,4,167,'BELUM DIBELI'),
-(7,5,95,'BELUM DIBELI'),
-(7,6,28,'BELUM DIBELI'),
-(8,1,44,'BELUM DIBELI'),
-(8,2,11,'BELUM DIBELI'),
-(8,3,20,'BELUM DIBELI'),
-(8,4,149,'BELUM DIBELI'),
-(8,5,85,'BELUM DIBELI'),
-(8,6,13,'BELUM DIBELI'),
-(9,1,9,'BELUM DIBELI'),
-(9,2,15,'BELUM DIBELI'),
-(9,3,142,'BELUM DIBELI'),
-(9,4,72,'BELUM DIBELI'),
-(9,5,148,'BELUM DIBELI'),
-(9,6,43,'BELUM DIBELI'),
-(10,1,156,'BELUM DIBELI'),
-(10,2,116,'BELUM DIBELI'),
-(10,3,32,'BELUM DIBELI'),
-(10,4,99,'BELUM DIBELI'),
-(10,5,127,'BELUM DIBELI'),
-(10,6,37,'BELUM DIBELI'),
-(11,1,170,'BELUM DIBELI'),
-(11,2,128,'BELUM DIBELI'),
-(11,3,47,'BELUM DIBELI'),
-(11,4,120,'BELUM DIBELI'),
-(11,5,7,'BELUM DIBELI'),
-(11,6,41,'BELUM DIBELI'),
-(12,1,84,'BELUM DIBELI'),
-(12,2,30,'BELUM DIBELI'),
-(12,3,59,'BELUM DIBELI'),
-(12,4,92,'BELUM DIBELI'),
-(12,5,33,'BELUM DIBELI'),
-(12,6,143,'BELUM DIBELI'),
-(13,1,79,'BELUM DIBELI'),
-(13,2,26,'BELUM DIBELI'),
-(13,3,90,'BELUM DIBELI'),
-(13,4,63,'BELUM DIBELI'),
-(13,5,21,'BELUM DIBELI'),
-(13,6,137,'BELUM DIBELI'),
-(14,1,79,'BELUM DIBELI'),
-(14,2,26,'BELUM DIBELI'),
-(14,3,90,'BELUM DIBELI'),
-(14,4,63,'BELUM DIBELI'),
-(14,5,21,'BELUM DIBELI'),
-(14,6,137,'BELUM DIBELI'),
-(15,1,156,'BELUM DIBELI'),
-(15,2,116,'BELUM DIBELI'),
+(1,1,165,'BELUM DIBELI'),
+(1,2,29,'BELUM DIBELI'),
+(1,3,77,'BELUM DIBELI'),
+(1,4,125,'BELUM DIBELI'),
+(1,5,37,'BELUM DIBELI'),
+(1,6,85,'BELUM DIBELI'),
+(2,1,121,'BELUM DIBELI'),
+(2,2,169,'BELUM DIBELI'),
+(2,3,33,'BELUM DIBELI'),
+(2,4,81,'BELUM DIBELI'),
+(2,5,129,'BELUM DIBELI'),
+(2,6,41,'BELUM DIBELI'),
+(3,1,120,'BELUM DIBELI'),
+(3,2,168,'BELUM DIBELI'),
+(3,3,32,'BELUM DIBELI'),
+(3,4,80,'BELUM DIBELI'),
+(3,5,128,'BELUM DIBELI'),
+(3,6,40,'BELUM DIBELI'),
+(4,1,77,'BELUM DIBELI'),
+(4,2,125,'BELUM DIBELI'),
+(4,3,37,'BELUM DIBELI'),
+(4,4,85,'BELUM DIBELI'),
+(4,5,133,'BELUM DIBELI'),
+(4,6,45,'BELUM DIBELI'),
+(5,1,166,'BELUM DIBELI'),
+(5,2,30,'BELUM DIBELI'),
+(5,3,78,'BELUM DIBELI'),
+(5,4,126,'BELUM DIBELI'),
+(5,5,38,'BELUM DIBELI'),
+(5,6,86,'BELUM DIBELI'),
+(6,1,75,'BELUM DIBELI'),
+(6,2,123,'BELUM DIBELI'),
+(6,3,35,'BELUM DIBELI'),
+(6,4,83,'BELUM DIBELI'),
+(6,5,131,'BELUM DIBELI'),
+(6,6,43,'BELUM DIBELI'),
+(7,1,166,'BELUM DIBELI'),
+(7,2,30,'BELUM DIBELI'),
+(7,3,78,'BELUM DIBELI'),
+(7,4,126,'BELUM DIBELI'),
+(7,5,38,'BELUM DIBELI'),
+(7,6,86,'BELUM DIBELI'),
+(8,1,122,'BELUM DIBELI'),
+(8,2,170,'BELUM DIBELI'),
+(8,3,34,'BELUM DIBELI'),
+(8,4,82,'BELUM DIBELI'),
+(8,5,130,'BELUM DIBELI'),
+(8,6,42,'BELUM DIBELI'),
+(9,1,122,'BELUM DIBELI'),
+(9,2,170,'BELUM DIBELI'),
+(9,3,34,'BELUM DIBELI'),
+(9,4,82,'BELUM DIBELI'),
+(9,5,130,'BELUM DIBELI'),
+(9,6,42,'BELUM DIBELI'),
+(10,1,168,'BELUM DIBELI'),
+(10,2,32,'BELUM DIBELI'),
+(10,3,80,'BELUM DIBELI'),
+(10,4,128,'BELUM DIBELI'),
+(10,5,40,'BELUM DIBELI'),
+(10,6,88,'BELUM DIBELI'),
+(11,1,120,'BELUM DIBELI'),
+(11,2,168,'BELUM DIBELI'),
+(11,3,32,'BELUM DIBELI'),
+(11,4,80,'BELUM DIBELI'),
+(11,5,128,'BELUM DIBELI'),
+(11,6,40,'BELUM DIBELI'),
+(12,1,29,'BELUM DIBELI'),
+(12,2,77,'BELUM DIBELI'),
+(12,3,125,'BELUM DIBELI'),
+(12,4,37,'BELUM DIBELI'),
+(12,5,85,'BELUM DIBELI'),
+(12,6,133,'BELUM DIBELI'),
+(13,1,122,'BELUM DIBELI'),
+(13,2,170,'BELUM DIBELI'),
+(13,3,34,'BELUM DIBELI'),
+(13,4,82,'BELUM DIBELI'),
+(13,5,130,'BELUM DIBELI'),
+(13,6,42,'BELUM DIBELI'),
+(14,1,75,'BELUM DIBELI'),
+(14,2,123,'BELUM DIBELI'),
+(14,3,35,'BELUM DIBELI'),
+(14,4,83,'BELUM DIBELI'),
+(14,5,131,'BELUM DIBELI'),
+(14,6,43,'BELUM DIBELI'),
+(15,1,120,'BELUM DIBELI'),
+(15,2,168,'BELUM DIBELI'),
 (15,3,32,'BELUM DIBELI'),
-(15,4,99,'BELUM DIBELI'),
-(15,5,127,'BELUM DIBELI'),
-(15,6,37,'BELUM DIBELI'),
-(16,1,79,'BELUM DIBELI'),
-(16,2,26,'BELUM DIBELI'),
-(16,3,90,'BELUM DIBELI'),
-(16,4,63,'BELUM DIBELI'),
-(16,5,21,'BELUM DIBELI'),
-(16,6,137,'BELUM DIBELI'),
-(17,1,170,'BELUM DIBELI'),
-(17,2,128,'BELUM DIBELI'),
-(17,3,47,'BELUM DIBELI'),
-(17,4,120,'BELUM DIBELI'),
-(17,5,7,'BELUM DIBELI'),
-(17,6,41,'BELUM DIBELI'),
-(18,1,170,'BELUM DIBELI'),
-(18,2,128,'BELUM DIBELI'),
-(18,3,47,'BELUM DIBELI'),
-(18,4,120,'BELUM DIBELI'),
-(18,5,7,'BELUM DIBELI'),
-(18,6,41,'BELUM DIBELI'),
-(19,1,156,'BELUM DIBELI'),
-(19,2,116,'BELUM DIBELI'),
-(19,3,32,'BELUM DIBELI'),
-(19,4,99,'BELUM DIBELI'),
-(19,5,127,'BELUM DIBELI'),
-(19,6,37,'BELUM DIBELI'),
-(20,1,44,'BELUM DIBELI'),
-(20,2,11,'BELUM DIBELI'),
-(20,3,20,'BELUM DIBELI'),
-(20,4,149,'BELUM DIBELI'),
-(20,5,85,'BELUM DIBELI'),
-(20,6,13,'BELUM DIBELI'),
-(21,1,68,'BELUM DIBELI'),
-(21,2,3,'BELUM DIBELI'),
-(21,3,80,'BELUM DIBELI'),
-(21,4,23,'BELUM DIBELI'),
-(21,5,4,'BELUM DIBELI'),
-(21,6,113,'BELUM DIBELI'),
-(22,1,156,'BELUM DIBELI'),
-(22,2,116,'BELUM DIBELI'),
-(22,3,32,'BELUM DIBELI'),
-(22,4,99,'BELUM DIBELI'),
-(22,5,127,'BELUM DIBELI'),
-(22,6,37,'BELUM DIBELI'),
-(23,1,44,'BELUM DIBELI'),
-(23,2,11,'BELUM DIBELI'),
-(23,3,20,'BELUM DIBELI'),
-(23,4,149,'BELUM DIBELI'),
+(15,4,80,'BELUM DIBELI'),
+(15,5,128,'BELUM DIBELI'),
+(15,6,40,'BELUM DIBELI'),
+(16,1,29,'BELUM DIBELI'),
+(16,2,77,'BELUM DIBELI'),
+(16,3,125,'BELUM DIBELI'),
+(16,4,37,'BELUM DIBELI'),
+(16,5,85,'BELUM DIBELI'),
+(16,6,133,'BELUM DIBELI'),
+(17,1,75,'BELUM DIBELI'),
+(17,2,123,'BELUM DIBELI'),
+(17,3,35,'BELUM DIBELI'),
+(17,4,83,'BELUM DIBELI'),
+(17,5,131,'BELUM DIBELI'),
+(17,6,43,'BELUM DIBELI'),
+(18,1,122,'BELUM DIBELI'),
+(18,2,170,'BELUM DIBELI'),
+(18,3,34,'BELUM DIBELI'),
+(18,4,82,'BELUM DIBELI'),
+(18,5,130,'BELUM DIBELI'),
+(18,6,42,'BELUM DIBELI'),
+(19,1,122,'BELUM DIBELI'),
+(19,2,170,'BELUM DIBELI'),
+(19,3,34,'BELUM DIBELI'),
+(19,4,82,'BELUM DIBELI'),
+(19,5,130,'BELUM DIBELI'),
+(19,6,42,'BELUM DIBELI'),
+(20,1,76,'BELUM DIBELI'),
+(20,2,124,'BELUM DIBELI'),
+(20,3,36,'BELUM DIBELI'),
+(20,4,84,'BELUM DIBELI'),
+(20,5,132,'BELUM DIBELI'),
+(20,6,44,'BELUM DIBELI'),
+(21,1,29,'BELUM DIBELI'),
+(21,2,77,'BELUM DIBELI'),
+(21,3,125,'BELUM DIBELI'),
+(21,4,37,'BELUM DIBELI'),
+(21,5,85,'BELUM DIBELI'),
+(21,6,133,'BELUM DIBELI'),
+(22,1,168,'BELUM DIBELI'),
+(22,2,32,'BELUM DIBELI'),
+(22,3,80,'BELUM DIBELI'),
+(22,4,128,'BELUM DIBELI'),
+(22,5,40,'BELUM DIBELI'),
+(22,6,88,'BELUM DIBELI'),
+(23,1,29,'BELUM DIBELI'),
+(23,2,77,'BELUM DIBELI'),
+(23,3,125,'BELUM DIBELI'),
+(23,4,37,'BELUM DIBELI'),
 (23,5,85,'BELUM DIBELI'),
-(23,6,13,'BELUM DIBELI'),
-(24,1,79,'BELUM DIBELI'),
-(24,2,26,'BELUM DIBELI'),
-(24,3,90,'BELUM DIBELI'),
-(24,4,63,'BELUM DIBELI'),
-(24,5,21,'BELUM DIBELI'),
-(24,6,137,'BELUM DIBELI'),
-(25,1,44,'BELUM DIBELI'),
-(25,2,11,'BELUM DIBELI'),
-(25,3,20,'BELUM DIBELI'),
-(25,4,149,'BELUM DIBELI'),
-(25,5,85,'BELUM DIBELI'),
-(25,6,13,'BELUM DIBELI'),
-(26,1,79,'BELUM DIBELI'),
-(26,2,26,'BELUM DIBELI'),
-(26,3,90,'BELUM DIBELI'),
-(26,4,63,'BELUM DIBELI'),
-(26,5,21,'BELUM DIBELI'),
-(26,6,137,'BELUM DIBELI'),
-(27,1,153,'BELUM DIBELI'),
-(27,2,84,'BELUM DIBELI'),
-(27,3,30,'BELUM DIBELI'),
-(27,4,59,'BELUM DIBELI'),
-(27,5,92,'BELUM DIBELI'),
-(27,6,33,'BELUM DIBELI'),
-(28,1,10,'BELUM DIBELI'),
-(28,2,9,'BELUM DIBELI'),
-(28,3,15,'BELUM DIBELI'),
-(28,4,142,'BELUM DIBELI'),
-(28,5,72,'BELUM DIBELI'),
-(28,6,148,'BELUM DIBELI'),
-(29,1,84,'BELUM DIBELI'),
+(23,6,133,'BELUM DIBELI'),
+(24,1,75,'BELUM DIBELI'),
+(24,2,123,'BELUM DIBELI'),
+(24,3,35,'BELUM DIBELI'),
+(24,4,83,'BELUM DIBELI'),
+(24,5,131,'BELUM DIBELI'),
+(24,6,43,'BELUM DIBELI'),
+(25,1,166,'BELUM DIBELI'),
+(25,2,30,'BELUM DIBELI'),
+(25,3,78,'BELUM DIBELI'),
+(25,4,126,'BELUM DIBELI'),
+(25,5,38,'BELUM DIBELI'),
+(25,6,86,'BELUM DIBELI'),
+(26,1,167,'BELUM DIBELI'),
+(26,2,31,'BELUM DIBELI'),
+(26,3,79,'BELUM DIBELI'),
+(26,4,127,'BELUM DIBELI'),
+(26,5,39,'BELUM DIBELI'),
+(26,6,87,'BELUM DIBELI'),
+(27,1,76,'BELUM DIBELI'),
+(27,2,124,'BELUM DIBELI'),
+(27,3,36,'BELUM DIBELI'),
+(27,4,84,'BELUM DIBELI'),
+(27,5,132,'BELUM DIBELI'),
+(27,6,44,'BELUM DIBELI'),
+(28,1,121,'BELUM DIBELI'),
+(28,2,169,'BELUM DIBELI'),
+(28,3,33,'BELUM DIBELI'),
+(28,4,81,'BELUM DIBELI'),
+(28,5,129,'BELUM DIBELI'),
+(28,6,41,'BELUM DIBELI'),
+(29,1,166,'BELUM DIBELI'),
 (29,2,30,'BELUM DIBELI'),
-(29,3,59,'BELUM DIBELI'),
-(29,4,92,'BELUM DIBELI'),
-(29,5,33,'BELUM DIBELI'),
-(29,6,143,'BELUM DIBELI'),
-(30,1,10,'BELUM DIBELI'),
-(30,2,9,'BELUM DIBELI'),
-(30,3,15,'BELUM DIBELI'),
-(30,4,142,'BELUM DIBELI'),
-(30,5,72,'BELUM DIBELI'),
-(30,6,148,'BELUM DIBELI'),
-(31,1,156,'BELUM DIBELI'),
-(31,2,116,'BELUM DIBELI'),
-(31,3,32,'BELUM DIBELI'),
-(31,4,99,'BELUM DIBELI'),
-(31,5,127,'BELUM DIBELI'),
-(31,6,37,'BELUM DIBELI'),
-(32,1,108,'BELUM DIBELI'),
-(32,2,40,'BELUM DIBELI'),
-(32,3,22,'BELUM DIBELI'),
-(32,4,167,'BELUM DIBELI'),
-(32,5,95,'BELUM DIBELI'),
-(32,6,28,'BELUM DIBELI'),
-(33,1,44,'BELUM DIBELI'),
-(33,2,11,'BELUM DIBELI'),
-(33,3,20,'BELUM DIBELI'),
-(33,4,149,'BELUM DIBELI'),
-(33,5,85,'BELUM DIBELI'),
-(33,6,13,'BELUM DIBELI'),
-(34,1,44,'BELUM DIBELI'),
-(34,2,11,'BELUM DIBELI'),
-(34,3,20,'BELUM DIBELI'),
-(34,4,149,'BELUM DIBELI'),
-(34,5,85,'BELUM DIBELI'),
-(34,6,13,'BELUM DIBELI'),
-(35,1,156,'BELUM DIBELI'),
-(35,2,116,'BELUM DIBELI'),
-(35,3,32,'BELUM DIBELI'),
-(35,4,99,'BELUM DIBELI'),
-(35,5,127,'BELUM DIBELI'),
-(35,6,37,'BELUM DIBELI'),
-(36,1,44,'BELUM DIBELI'),
-(36,2,11,'BELUM DIBELI'),
-(36,3,20,'BELUM DIBELI'),
-(36,4,149,'BELUM DIBELI'),
-(36,5,85,'BELUM DIBELI'),
-(36,6,13,'BELUM DIBELI'),
-(37,1,79,'BELUM DIBELI'),
-(37,2,26,'BELUM DIBELI'),
-(37,3,90,'BELUM DIBELI'),
-(37,4,63,'BELUM DIBELI'),
-(37,5,21,'BELUM DIBELI'),
-(37,6,137,'BELUM DIBELI'),
-(38,1,170,'BELUM DIBELI'),
-(38,2,128,'BELUM DIBELI'),
-(38,3,47,'BELUM DIBELI'),
-(38,4,120,'BELUM DIBELI'),
-(38,5,7,'BELUM DIBELI'),
-(38,6,41,'BELUM DIBELI'),
-(39,1,108,'BELUM DIBELI'),
-(39,2,40,'BELUM DIBELI'),
-(39,3,22,'BELUM DIBELI'),
-(39,4,167,'BELUM DIBELI'),
-(39,5,95,'BELUM DIBELI'),
-(39,6,28,'BELUM DIBELI'),
-(40,1,68,'BELUM DIBELI'),
-(40,2,3,'BELUM DIBELI'),
-(40,3,80,'BELUM DIBELI'),
-(40,4,23,'BELUM DIBELI'),
-(40,5,4,'BELUM DIBELI'),
-(40,6,113,'BELUM DIBELI'),
-(41,1,170,'BELUM DIBELI'),
-(41,2,128,'BELUM DIBELI'),
-(41,3,47,'BELUM DIBELI'),
-(41,4,120,'BELUM DIBELI'),
-(41,5,7,'BELUM DIBELI'),
-(41,6,41,'BELUM DIBELI'),
-(42,1,44,'BELUM DIBELI'),
-(42,2,11,'BELUM DIBELI'),
-(42,3,20,'BELUM DIBELI'),
-(42,4,149,'BELUM DIBELI'),
-(42,5,85,'BELUM DIBELI'),
-(42,6,13,'BELUM DIBELI'),
-(43,1,10,'BELUM DIBELI'),
-(43,2,9,'BELUM DIBELI'),
-(43,3,15,'BELUM DIBELI'),
-(43,4,142,'BELUM DIBELI'),
-(43,5,72,'BELUM DIBELI'),
-(43,6,148,'BELUM DIBELI'),
-(44,1,79,'BELUM DIBELI'),
-(44,2,26,'BELUM DIBELI'),
-(44,3,90,'BELUM DIBELI'),
-(44,4,63,'BELUM DIBELI'),
-(44,5,21,'BELUM DIBELI'),
-(44,6,137,'BELUM DIBELI'),
-(45,1,153,'BELUM DIBELI'),
-(45,2,84,'BELUM DIBELI'),
-(45,3,30,'BELUM DIBELI'),
-(45,4,59,'BELUM DIBELI'),
-(45,5,92,'BELUM DIBELI'),
-(45,6,33,'BELUM DIBELI'),
-(46,1,108,'BELUM DIBELI'),
-(46,2,40,'BELUM DIBELI'),
-(46,3,22,'BELUM DIBELI'),
-(46,4,167,'BELUM DIBELI'),
-(46,5,95,'BELUM DIBELI'),
-(46,6,28,'BELUM DIBELI'),
-(47,1,108,'BELUM DIBELI'),
-(47,2,40,'BELUM DIBELI'),
-(47,3,22,'BELUM DIBELI'),
-(47,4,167,'BELUM DIBELI'),
-(47,5,95,'BELUM DIBELI'),
-(47,6,28,'BELUM DIBELI'),
-(48,1,68,'BELUM DIBELI'),
-(48,2,3,'BELUM DIBELI'),
-(48,3,80,'BELUM DIBELI'),
-(48,4,23,'BELUM DIBELI'),
-(48,5,4,'BELUM DIBELI'),
-(48,6,113,'BELUM DIBELI'),
-(49,1,108,'BELUM DIBELI'),
-(49,2,40,'BELUM DIBELI'),
-(49,3,22,'BELUM DIBELI'),
-(49,4,167,'BELUM DIBELI'),
-(49,5,95,'BELUM DIBELI'),
-(49,6,28,'BELUM DIBELI'),
-(50,1,68,'BELUM DIBELI'),
-(50,2,3,'BELUM DIBELI'),
-(50,3,80,'BELUM DIBELI'),
-(50,4,23,'BELUM DIBELI'),
-(50,5,4,'BELUM DIBELI'),
-(50,6,113,'BELUM DIBELI'),
-(51,1,9,'BELUM DIBELI'),
-(51,2,15,'BELUM DIBELI'),
-(51,3,142,'BELUM DIBELI'),
-(51,4,72,'BELUM DIBELI'),
-(51,5,148,'BELUM DIBELI'),
+(29,3,78,'BELUM DIBELI'),
+(29,4,126,'BELUM DIBELI'),
+(29,5,38,'BELUM DIBELI'),
+(29,6,86,'BELUM DIBELI'),
+(30,1,120,'BELUM DIBELI'),
+(30,2,168,'BELUM DIBELI'),
+(30,3,32,'BELUM DIBELI'),
+(30,4,80,'BELUM DIBELI'),
+(30,5,128,'BELUM DIBELI'),
+(30,6,40,'BELUM DIBELI'),
+(31,1,122,'BELUM DIBELI'),
+(31,2,170,'BELUM DIBELI'),
+(31,3,34,'BELUM DIBELI'),
+(31,4,82,'BELUM DIBELI'),
+(31,5,130,'BELUM DIBELI'),
+(31,6,42,'BELUM DIBELI'),
+(32,1,121,'BELUM DIBELI'),
+(32,2,169,'BELUM DIBELI'),
+(32,3,33,'BELUM DIBELI'),
+(32,4,81,'BELUM DIBELI'),
+(32,5,129,'BELUM DIBELI'),
+(32,6,41,'BELUM DIBELI'),
+(33,1,166,'BELUM DIBELI'),
+(33,2,30,'BELUM DIBELI'),
+(33,3,78,'BELUM DIBELI'),
+(33,4,126,'BELUM DIBELI'),
+(33,5,38,'BELUM DIBELI'),
+(33,6,86,'BELUM DIBELI'),
+(34,1,76,'BELUM DIBELI'),
+(34,2,124,'BELUM DIBELI'),
+(34,3,36,'BELUM DIBELI'),
+(34,4,84,'BELUM DIBELI'),
+(34,5,132,'BELUM DIBELI'),
+(34,6,44,'BELUM DIBELI'),
+(35,1,168,'BELUM DIBELI'),
+(35,2,32,'BELUM DIBELI'),
+(35,3,80,'BELUM DIBELI'),
+(35,4,128,'BELUM DIBELI'),
+(35,5,40,'BELUM DIBELI'),
+(35,6,88,'BELUM DIBELI'),
+(36,1,167,'BELUM DIBELI'),
+(36,2,31,'BELUM DIBELI'),
+(36,3,79,'BELUM DIBELI'),
+(36,4,127,'BELUM DIBELI'),
+(36,5,39,'BELUM DIBELI'),
+(36,6,87,'BELUM DIBELI'),
+(37,1,76,'BELUM DIBELI'),
+(37,2,124,'BELUM DIBELI'),
+(37,3,36,'BELUM DIBELI'),
+(37,4,84,'BELUM DIBELI'),
+(37,5,132,'BELUM DIBELI'),
+(37,6,44,'BELUM DIBELI'),
+(38,1,74,'BELUM DIBELI'),
+(38,2,122,'BELUM DIBELI'),
+(38,3,170,'BELUM DIBELI'),
+(38,4,34,'BELUM DIBELI'),
+(38,5,82,'BELUM DIBELI'),
+(38,6,130,'BELUM DIBELI'),
+(39,1,167,'BELUM DIBELI'),
+(39,2,31,'BELUM DIBELI'),
+(39,3,79,'BELUM DIBELI'),
+(39,4,127,'BELUM DIBELI'),
+(39,5,39,'BELUM DIBELI'),
+(39,6,87,'BELUM DIBELI'),
+(40,1,120,'BELUM DIBELI'),
+(40,2,168,'BELUM DIBELI'),
+(40,3,32,'BELUM DIBELI'),
+(40,4,80,'BELUM DIBELI'),
+(40,5,128,'BELUM DIBELI'),
+(40,6,40,'BELUM DIBELI'),
+(41,1,165,'BELUM DIBELI'),
+(41,2,29,'BELUM DIBELI'),
+(41,3,77,'BELUM DIBELI'),
+(41,4,125,'BELUM DIBELI'),
+(41,5,37,'BELUM DIBELI'),
+(41,6,85,'BELUM DIBELI'),
+(42,1,167,'BELUM DIBELI'),
+(42,2,31,'BELUM DIBELI'),
+(42,3,79,'BELUM DIBELI'),
+(42,4,127,'BELUM DIBELI'),
+(42,5,39,'BELUM DIBELI'),
+(42,6,87,'BELUM DIBELI'),
+(43,1,121,'BELUM DIBELI'),
+(43,2,169,'BELUM DIBELI'),
+(43,3,33,'BELUM DIBELI'),
+(43,4,81,'BELUM DIBELI'),
+(43,5,129,'BELUM DIBELI'),
+(43,6,41,'BELUM DIBELI'),
+(44,1,76,'BELUM DIBELI'),
+(44,2,124,'BELUM DIBELI'),
+(44,3,36,'BELUM DIBELI'),
+(44,4,84,'BELUM DIBELI'),
+(44,5,132,'BELUM DIBELI'),
+(44,6,44,'BELUM DIBELI'),
+(45,1,75,'BELUM DIBELI'),
+(45,2,123,'BELUM DIBELI'),
+(45,3,35,'BELUM DIBELI'),
+(45,4,83,'BELUM DIBELI'),
+(45,5,131,'BELUM DIBELI'),
+(45,6,43,'BELUM DIBELI'),
+(46,1,76,'BELUM DIBELI'),
+(46,2,124,'BELUM DIBELI'),
+(46,3,36,'BELUM DIBELI'),
+(46,4,84,'BELUM DIBELI'),
+(46,5,132,'BELUM DIBELI'),
+(46,6,44,'BELUM DIBELI'),
+(47,1,166,'BELUM DIBELI'),
+(47,2,30,'BELUM DIBELI'),
+(47,3,78,'BELUM DIBELI'),
+(47,4,126,'BELUM DIBELI'),
+(47,5,38,'BELUM DIBELI'),
+(47,6,86,'BELUM DIBELI'),
+(48,1,166,'BELUM DIBELI'),
+(48,2,30,'BELUM DIBELI'),
+(48,3,78,'BELUM DIBELI'),
+(48,4,126,'BELUM DIBELI'),
+(48,5,38,'BELUM DIBELI'),
+(48,6,86,'BELUM DIBELI'),
+(49,1,75,'BELUM DIBELI'),
+(49,2,123,'BELUM DIBELI'),
+(49,3,35,'BELUM DIBELI'),
+(49,4,83,'BELUM DIBELI'),
+(49,5,131,'BELUM DIBELI'),
+(49,6,43,'BELUM DIBELI'),
+(50,1,121,'BELUM DIBELI'),
+(50,2,169,'BELUM DIBELI'),
+(50,3,33,'BELUM DIBELI'),
+(50,4,81,'BELUM DIBELI'),
+(50,5,129,'BELUM DIBELI'),
+(50,6,41,'BELUM DIBELI'),
+(51,1,75,'BELUM DIBELI'),
+(51,2,123,'BELUM DIBELI'),
+(51,3,35,'BELUM DIBELI'),
+(51,4,83,'BELUM DIBELI'),
+(51,5,131,'BELUM DIBELI'),
 (51,6,43,'BELUM DIBELI'),
-(52,1,84,'BELUM DIBELI'),
-(52,2,30,'BELUM DIBELI'),
-(52,3,59,'BELUM DIBELI'),
-(52,4,92,'BELUM DIBELI'),
-(52,5,33,'BELUM DIBELI'),
-(52,6,143,'BELUM DIBELI'),
-(53,1,108,'BELUM DIBELI'),
-(53,2,40,'BELUM DIBELI'),
-(53,3,22,'BELUM DIBELI'),
-(53,4,167,'BELUM DIBELI'),
-(53,5,95,'BELUM DIBELI'),
-(53,6,28,'BELUM DIBELI'),
-(54,1,9,'BELUM DIBELI'),
-(54,2,15,'BELUM DIBELI'),
-(54,3,142,'BELUM DIBELI'),
-(54,4,72,'BELUM DIBELI'),
-(54,5,148,'BELUM DIBELI'),
-(54,6,43,'BELUM DIBELI'),
-(55,1,153,'BELUM DIBELI'),
-(55,2,84,'BELUM DIBELI'),
-(55,3,30,'BELUM DIBELI'),
-(55,4,59,'BELUM DIBELI'),
-(55,5,92,'BELUM DIBELI'),
-(55,6,33,'BELUM DIBELI'),
-(56,1,156,'BELUM DIBELI'),
-(56,2,116,'BELUM DIBELI'),
-(56,3,32,'BELUM DIBELI'),
-(56,4,99,'BELUM DIBELI'),
-(56,5,127,'BELUM DIBELI'),
-(56,6,37,'BELUM DIBELI'),
-(57,1,68,'BELUM DIBELI'),
-(57,2,3,'BELUM DIBELI'),
-(57,3,80,'BELUM DIBELI'),
-(57,4,23,'BELUM DIBELI'),
-(57,5,4,'BELUM DIBELI'),
-(57,6,113,'BELUM DIBELI'),
-(58,1,79,'BELUM DIBELI'),
-(58,2,26,'BELUM DIBELI'),
-(58,3,90,'BELUM DIBELI'),
-(58,4,63,'BELUM DIBELI'),
-(58,5,21,'BELUM DIBELI'),
-(58,6,137,'BELUM DIBELI'),
-(59,1,170,'BELUM DIBELI'),
-(59,2,128,'BELUM DIBELI'),
-(59,3,47,'BELUM DIBELI'),
-(59,4,120,'BELUM DIBELI'),
-(59,5,7,'BELUM DIBELI'),
-(59,6,41,'BELUM DIBELI'),
-(60,1,68,'BELUM DIBELI'),
-(60,2,3,'BELUM DIBELI'),
-(60,3,80,'BELUM DIBELI'),
-(60,4,23,'BELUM DIBELI'),
-(60,5,4,'BELUM DIBELI'),
-(60,6,113,'BELUM DIBELI');
+(52,1,167,'BELUM DIBELI'),
+(52,2,31,'BELUM DIBELI'),
+(52,3,79,'BELUM DIBELI'),
+(52,4,127,'BELUM DIBELI'),
+(52,5,39,'BELUM DIBELI'),
+(52,6,87,'BELUM DIBELI'),
+(53,1,75,'BELUM DIBELI'),
+(53,2,123,'BELUM DIBELI'),
+(53,3,35,'BELUM DIBELI'),
+(53,4,83,'BELUM DIBELI'),
+(53,5,131,'BELUM DIBELI'),
+(53,6,43,'BELUM DIBELI'),
+(54,1,76,'BELUM DIBELI'),
+(54,2,124,'BELUM DIBELI'),
+(54,3,36,'BELUM DIBELI'),
+(54,4,84,'BELUM DIBELI'),
+(54,5,132,'BELUM DIBELI'),
+(54,6,44,'BELUM DIBELI'),
+(55,1,121,'BELUM DIBELI'),
+(55,2,169,'BELUM DIBELI'),
+(55,3,33,'BELUM DIBELI'),
+(55,4,81,'BELUM DIBELI'),
+(55,5,129,'BELUM DIBELI'),
+(55,6,41,'BELUM DIBELI'),
+(56,1,121,'BELUM DIBELI'),
+(56,2,169,'BELUM DIBELI'),
+(56,3,33,'BELUM DIBELI'),
+(56,4,81,'BELUM DIBELI'),
+(56,5,129,'BELUM DIBELI'),
+(56,6,41,'BELUM DIBELI'),
+(57,1,167,'BELUM DIBELI'),
+(57,2,31,'BELUM DIBELI'),
+(57,3,79,'BELUM DIBELI'),
+(57,4,127,'BELUM DIBELI'),
+(57,5,39,'BELUM DIBELI'),
+(57,6,87,'BELUM DIBELI'),
+(58,1,167,'BELUM DIBELI'),
+(58,2,31,'BELUM DIBELI'),
+(58,3,79,'BELUM DIBELI'),
+(58,4,127,'BELUM DIBELI'),
+(58,5,39,'BELUM DIBELI'),
+(58,6,87,'BELUM DIBELI'),
+(59,1,122,'BELUM DIBELI'),
+(59,2,170,'BELUM DIBELI'),
+(59,3,34,'BELUM DIBELI'),
+(59,4,82,'BELUM DIBELI'),
+(59,5,130,'BELUM DIBELI'),
+(59,6,42,'BELUM DIBELI'),
+(60,1,77,'BELUM DIBELI'),
+(60,2,125,'BELUM DIBELI'),
+(60,3,37,'BELUM DIBELI'),
+(60,4,85,'BELUM DIBELI'),
+(60,5,133,'BELUM DIBELI'),
+(60,6,45,'BELUM DIBELI');
 /*!40000 ALTER TABLE `toko_daily` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
 SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+
+--
+-- Dumping events for database 'nos'
+--
+/*!50106 SET @save_time_zone= @@TIME_ZONE */ ;
+/*!50106 DROP EVENT IF EXISTS `refresh_daily_shop` */;
+DELIMITER ;;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;;
+/*!50003 SET character_set_client  = utf8mb4 */ ;;
+/*!50003 SET character_set_results = utf8mb4 */ ;;
+/*!50003 SET collation_connection  = utf8mb4_uca1400_ai_ci */ ;;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;;
+/*!50003 SET @saved_time_zone      = @@time_zone */ ;;
+/*!50003 SET time_zone             = 'SYSTEM' */ ;;
+/*!50106 CREATE*/ /*!50117 DEFINER=`root`@`localhost`*/ /*!50106 EVENT `refresh_daily_shop` ON SCHEDULE EVERY 24 HOUR STARTS '2026-05-19 00:00:00' ON COMPLETION NOT PRESERVE ENABLE DO BEGIN
+    DELETE FROM toko_daily;
+    INSERT INTO toko_daily (akun_id, slot_toko, kartu_id, status)
+    WITH seed_kartu AS (
+        SELECT kartu_id, akun_id, RAND(NOW() + 0) AS seed_toko
+        FROM kartu, akun
+        ORDER BY seed_toko DESC
+    )
+    SELECT akun_id, slot_toko, kartu_id, 'BELUM DIBELI'
+    FROM (SELECT akun_id, kartu_id, ROW_NUMBER() OVER (PARTITION BY akun_id) AS slot_toko
+        FROM akun, kartu
+        WHERE (akun_id, kartu_id) IN (SELECT akun_id, kartu_id 
+                                    FROM seed_kartu)) s3
+    WHERE slot_toko <=6;
+END */ ;;
+/*!50003 SET time_zone             = @saved_time_zone */ ;;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;;
+/*!50003 SET character_set_results = @saved_cs_results */ ;;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;;
+DELIMITER ;
+/*!50106 SET TIME_ZONE= @save_time_zone */ ;
 
 --
 -- Final view structure for view `akunarena`
@@ -4407,4 +4446,4 @@ SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*M!100616 SET NOTE_VERBOSITY=@OLD_NOTE_VERBOSITY */;
 
--- Dump completed on 2026-05-20 19:45:50
+-- Dump completed on 2026-05-20 20:21:16
