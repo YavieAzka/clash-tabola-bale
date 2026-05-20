@@ -35,9 +35,7 @@ CREATE TABLE IF NOT EXISTS Akun (
     waktu_bergabung DATETIME NULL,
 
     FOREIGN KEY (klan_id) 
-        REFERENCES Klan(klan_id) 
-        ON DELETE SET NULL 
-        ON UPDATE CASCADE
+        REFERENCES Klan(klan_id)
 );
 
 -- 5. View current_arena 
@@ -70,14 +68,10 @@ CREATE TABLE IF NOT EXISTS Kartu (
     arena_id_unlocked INT,
 
     FOREIGN KEY (nama_rarity) 
-        REFERENCES Rarity(nama_rarity) 
-        ON DELETE SET NULL 
-        ON UPDATE CASCADE,
+        REFERENCES Rarity(nama_rarity),
         
     FOREIGN KEY (arena_id_unlocked) 
-        REFERENCES Arena(arena_id) 
-        ON DELETE SET NULL 
-        ON UPDATE CASCADE
+        REFERENCES Arena(arena_id)
 );
 
 -- 7. Tabel Bangunan
@@ -90,9 +84,7 @@ CREATE TABLE IF NOT EXISTS Bangunan (
     kecepatan_menyerang DECIMAL(5,2),
 
     FOREIGN KEY (kartu_id) 
-        REFERENCES Kartu(kartu_id) 
-        ON DELETE CASCADE 
-        ON UPDATE CASCADE
+        REFERENCES Kartu(kartu_id)
 );
 
 -- 8. Tabel Pasukan
@@ -106,9 +98,7 @@ CREATE TABLE IF NOT EXISTS Pasukan (
     tipe_pasukan ENUM('darat', 'udara') NOT NULL,
 
     FOREIGN KEY (kartu_id) 
-        REFERENCES Kartu(kartu_id) 
-        ON DELETE CASCADE 
-        ON UPDATE CASCADE
+        REFERENCES Kartu(kartu_id)
 );
 
 -- 9. Tabel Sihir
@@ -117,9 +107,7 @@ CREATE TABLE IF NOT EXISTS Sihir (
     radius_serangan DECIMAL(5,2),
 
     FOREIGN KEY (kartu_id) 
-        REFERENCES Kartu(kartu_id) 
-        ON DELETE CASCADE 
-        ON UPDATE CASCADE
+        REFERENCES Kartu(kartu_id)
 );
 
 -- 10. Tabel Deck
@@ -130,9 +118,7 @@ CREATE TABLE IF NOT EXISTS Deck (
     PRIMARY KEY (akun_id, nomor_slot),
 
     FOREIGN KEY (akun_id) 
-        REFERENCES Akun(akun_id) 
-        ON DELETE CASCADE 
-        ON UPDATE CASCADE
+        REFERENCES Akun(akun_id)
 );
 
 -- 11. Tabel KoleksiKartu
@@ -144,14 +130,10 @@ CREATE TABLE IF NOT EXISTS KoleksiKartu (
     PRIMARY KEY (akun_id, kartu_id),
 
     FOREIGN KEY (akun_id) 
-        REFERENCES Akun(akun_id) 
-        ON DELETE CASCADE 
-        ON UPDATE CASCADE,
+        REFERENCES Akun(akun_id),
         
     FOREIGN KEY (kartu_id) 
-        REFERENCES Kartu(kartu_id) 
-        ON DELETE CASCADE 
-        ON UPDATE CASCADE
+        REFERENCES Kartu(kartu_id)
 );
 
 -- 12. Tabel KartuDeck
@@ -162,14 +144,10 @@ CREATE TABLE IF NOT EXISTS KartuDeck (
     PRIMARY KEY (akun_id, nomor_slot, kartu_id),
 
     FOREIGN KEY (akun_id, nomor_slot) 
-        REFERENCES Deck(akun_id, nomor_slot) 
-        ON DELETE CASCADE 
-        ON UPDATE CASCADE,
+        REFERENCES Deck(akun_id, nomor_slot),
         
     FOREIGN KEY (kartu_id) 
-        REFERENCES Kartu(kartu_id) 
-        ON DELETE CASCADE 
-        ON UPDATE CASCADE
+        REFERENCES Kartu(kartu_id)
 );
 
 -- 13. Tabel Pertarungan
@@ -177,8 +155,8 @@ CREATE TABLE IF NOT EXISTS Pertarungan (
     pertarungan_id INT PRIMARY KEY AUTO_INCREMENT,
     akun1_id INT NOT NULL,
     akun2_id INT NOT NULL,
-    nomor_slot_akun1 TINYINT NOT NULL,
-    nomor_slot_akun2 TINYINT NOT NULL,
+    nomor_slot_akun1 TINYINT NULL,
+    nomor_slot_akun2 TINYINT NULL,
     arena_id INT NOT NULL,
     pemenang_id INT NOT NULL,
     waktu_pertarungan DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -188,34 +166,22 @@ CREATE TABLE IF NOT EXISTS Pertarungan (
     CONSTRAINT chk_pemenang CHECK (pemenang_id = akun1_id OR pemenang_id = akun2_id),
     
     FOREIGN KEY (akun1_id) 
-        REFERENCES Akun(akun_id) 
-        ON DELETE RESTRICT 
-        ON UPDATE RESTRICT,
+        REFERENCES Akun(akun_id),
         
     FOREIGN KEY (akun2_id) 
-        REFERENCES Akun(akun_id) 
-        ON DELETE RESTRICT 
-        ON UPDATE RESTRICT,
+        REFERENCES Akun(akun_id),
         
     FOREIGN KEY (pemenang_id) 
-        REFERENCES Akun(akun_id) 
-        ON DELETE RESTRICT 
-        ON UPDATE RESTRICT,
+        REFERENCES Akun(akun_id),
         
     FOREIGN KEY (akun1_id, nomor_slot_akun1) 
-        REFERENCES Deck(akun_id, nomor_slot) 
-        ON DELETE RESTRICT 
-        ON UPDATE RESTRICT,
+        REFERENCES Deck(akun_id, nomor_slot),
         
     FOREIGN KEY (akun2_id, nomor_slot_akun2) 
-        REFERENCES Deck(akun_id, nomor_slot) 
-        ON DELETE RESTRICT 
-        ON UPDATE RESTRICT,
+        REFERENCES Deck(akun_id, nomor_slot),
         
     FOREIGN KEY (arena_id) 
         REFERENCES Arena(arena_id) 
-        ON DELETE RESTRICT 
-        ON UPDATE RESTRICT
 );
 
 -- 14. Tabel Chat
@@ -227,14 +193,10 @@ CREATE TABLE IF NOT EXISTS Chat (
     PRIMARY KEY (klan_id, urutan),
 
     FOREIGN KEY (klan_id) 
-        REFERENCES Klan(klan_id) 
-        ON DELETE CASCADE 
-        ON UPDATE CASCADE,
+        REFERENCES Klan(klan_id),
         
     FOREIGN KEY (akun_id_pengirim) 
-        REFERENCES Akun(akun_id) 
-        ON DELETE CASCADE 
-        ON UPDATE CASCADE
+        REFERENCES Akun(akun_id)
 );
 
 -- 15. Tabel PesanBiasa
@@ -245,9 +207,7 @@ CREATE TABLE IF NOT EXISTS PesanBiasa (
     PRIMARY KEY (klan_id, urutan),
 
     FOREIGN KEY (klan_id, urutan) 
-        REFERENCES Chat(klan_id, urutan) 
-        ON DELETE CASCADE 
-        ON UPDATE CASCADE
+        REFERENCES Chat(klan_id, urutan)
 );
 
 -- 16. Tabel PermintaanDonasi
@@ -259,14 +219,10 @@ CREATE TABLE IF NOT EXISTS PermintaanDonasi (
     PRIMARY KEY (klan_id, urutan),
 
     FOREIGN KEY (klan_id, urutan) 
-        REFERENCES Chat(klan_id, urutan) 
-        ON DELETE CASCADE 
-        ON UPDATE CASCADE,
+        REFERENCES Chat(klan_id, urutan),
         
     FOREIGN KEY (kartu_id) 
-        REFERENCES Kartu(kartu_id) 
-        ON DELETE CASCADE 
-        ON UPDATE CASCADE
+        REFERENCES Kartu(kartu_id)
 );
 
 -- 17. Tabel BerbagiReplay
@@ -278,12 +234,8 @@ CREATE TABLE IF NOT EXISTS BerbagiReplay (
     PRIMARY KEY (klan_id, urutan),
 
     FOREIGN KEY (klan_id, urutan) 
-        REFERENCES Chat(klan_id, urutan) 
-        ON DELETE CASCADE 
-        ON UPDATE CASCADE,
+        REFERENCES Chat(klan_id, urutan),
         
     FOREIGN KEY (pertarungan_id) 
-        REFERENCES Pertarungan(pertarungan_id) 
-        ON DELETE CASCADE 
-        ON UPDATE CASCADE
+        REFERENCES Pertarungan(pertarungan_id)
 );
