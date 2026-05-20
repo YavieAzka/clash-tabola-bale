@@ -73,6 +73,32 @@ BEGIN
 END//
 DELIMITER ;
 
+--Waktu bergabung dan role NULL jika akun tidak bergabung dengan sebuah klan
+DELIMITER $$
+CREATE TRIGGER trg_ins_null_klan
+AFTER INSERT ON akun
+FOR EACH ROW
+BEGIN
+    UPDATE akun
+    SET akun.waktu_bergabung = NULL, akun.role = NULL
+    WHERE akun.akun_id = NEW.akun_id AND
+          NEW.klan_id = NULL;
+END $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER trg_upd_null_klan
+AFTER UPDATE ON akun
+FOR EACH ROW
+BEGIN
+    UPDATE akun
+    SET akun.waktu_bergabung = NULL, akun.role = NULL
+    WHERE akun.akun_id = NEW.akun_id AND
+          NEW.klan_id = NULL;
+END $$
+DELIMITER ;
+
+
 -- ============================================================
 -- DATABASE CONSTRAINTS (Triggers)
 -- ============================================================
@@ -190,6 +216,30 @@ BEGIN
         SET MESSAGE_TEXT = 'Jumlah donasi melebihi batas maksimal untuk rarity kartu ini';
     END IF;
 END//
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER trg_ins_null_klan
+AFTER INSERT ON akun
+FOR EACH ROW
+BEGIN
+    UPDATE akun
+    SET akun.waktu_bergabung = NULL, akun.role = NULL
+    WHERE akun.akun_id = NEW.akun_id AND
+          NEW.klan_id = NULL;
+END $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER trg_upd_null_klan
+AFTER UPDATE ON akun
+FOR EACH ROW
+BEGIN
+    UPDATE akun
+    SET akun.waktu_bergabung = NULL, akun.role = NULL
+    WHERE akun.akun_id = NEW.akun_id AND
+          NEW.klan_id = NULL;
+END $$
 DELIMITER ;
 
 -- ============================================================
