@@ -98,7 +98,7 @@ ADD winrate DECIMAL(5,2) DEFAULT NULL;
 UPDATE akun NATURAL JOIN (SELECT akun_id, COUNT(akun_id) AS jumlah_battle, SUM(win) AS jumlah_menang
                           FROM ((SELECT akun1_id AS akun_id, (pemenang_id = akun1_id) AS win
                                   FROM pertarungan) UNION ALL
-                                (SELECT akun2_id AS akun_id, (pemenang_id = akun2_id) AS WINDOW
+                                                                (SELECT akun2_id AS akun_id, (pemenang_id = akun2_id) AS win
                                   FROM pertarungan)) w
                           GROUP BY akun_id) w2
 SET winrate = jumlah_menang * 100 / jumlah_battle;
