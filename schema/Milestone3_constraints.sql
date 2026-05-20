@@ -11,6 +11,20 @@ ALTER TABLE PermintaanDonasi ADD CONSTRAINT chk_jml_donasi CHECK (jumlah_kartu_d
 -- Level kartu pada KoleksiKartu minimal 1
 ALTER TABLE KoleksiKartu ADD CONSTRAINT chk_level_kartu CHECK (level >= 1);
 
+-- Jumlah emas/piala akun tidak negatif
+ALTER TABLE Akun ADD CONSTRAINT chk_jumlah_emas CHECK (jumlah_emas >= 0);
+ALTER TABLE Akun ADD CONSTRAINT chk_jumlah_piala CHECK (jumlah_piala >= 0);
+
+-- Elixir kartu harus 1..10
+ALTER TABLE Kartu ADD CONSTRAINT chk_elixir_kartu CHECK (elixir BETWEEN 1 AND 10);
+
+-- Nomor slot deck harus 1..5
+ALTER TABLE Deck ADD CONSTRAINT chk_nomor_slot_deck CHECK (nomor_slot BETWEEN 1 AND 5);
+
+-- Validasi pertarungan
+ALTER TABLE Pertarungan ADD CONSTRAINT chk_beda_pemain CHECK (akun1_id <> akun2_id);
+ALTER TABLE Pertarungan ADD CONSTRAINT chk_pemenang CHECK (pemenang_id = akun1_id OR pemenang_id = akun2_id);
+
 -- ============================================================
 -- RELATION CONSTRAINTS (Triggers)
 -- ============================================================
@@ -76,25 +90,25 @@ DELIMITER ;
 --Waktu bergabung dan role NULL jika akun tidak bergabung dengan sebuah klan
 DELIMITER $$
 CREATE TRIGGER trg_ins_null_klan
-AFTER INSERT ON akun
+BEFORE INSERT ON akun
 FOR EACH ROW
 BEGIN
-    UPDATE akun
-    SET akun.waktu_bergabung = NULL, akun.role = NULL
-    WHERE akun.akun_id = NEW.akun_id AND
-          NEW.klan_id = NULL;
+    IF NEW.klan_id IS NULL THEN
+        SET NEW.waktu_bergabung = NULL;
+        SET NEW.role = NULL;
+    END IF;
 END $$
 DELIMITER ;
 
 DELIMITER $$
 CREATE TRIGGER trg_upd_null_klan
-AFTER UPDATE ON akun
+BEFORE UPDATE ON akun
 FOR EACH ROW
 BEGIN
-    UPDATE akun
-    SET akun.waktu_bergabung = NULL, akun.role = NULL
-    WHERE akun.akun_id = NEW.akun_id AND
-          NEW.klan_id = NULL;
+    IF NEW.klan_id IS NULL THEN
+        SET NEW.waktu_bergabung = NULL;
+        SET NEW.role = NULL;
+    END IF;
 END $$
 DELIMITER ;
 
@@ -216,30 +230,6 @@ BEGIN
         SET MESSAGE_TEXT = 'Jumlah donasi melebihi batas maksimal untuk rarity kartu ini';
     END IF;
 END//
-DELIMITER ;
-
-DELIMITER $$
-CREATE TRIGGER trg_ins_null_klan
-AFTER INSERT ON akun
-FOR EACH ROW
-BEGIN
-    UPDATE akun
-    SET akun.waktu_bergabung = NULL, akun.role = NULL
-    WHERE akun.akun_id = NEW.akun_id AND
-          NEW.klan_id = NULL;
-END $$
-DELIMITER ;
-
-DELIMITER $$
-CREATE TRIGGER trg_upd_null_klan
-AFTER UPDATE ON akun
-FOR EACH ROW
-BEGIN
-    UPDATE akun
-    SET akun.waktu_bergabung = NULL, akun.role = NULL
-    WHERE akun.akun_id = NEW.akun_id AND
-          NEW.klan_id = NULL;
-END $$
 DELIMITER ;
 
 -- ============================================================
@@ -464,8 +454,28 @@ FOREIGN KEY (arena_id_unlocked) REFERENCES Arena(arena_id)
 ON DELETE SET NULL
 ON UPDATE CASCADE;
 
+ALTER TABLE kartu ADD CONSTRAINT fk_kartu_rarity
+FOREIGN KEY (nama_rarity) REFERENCES Rarity(nama_rarity)
+ON DELETE RESTRICT
+ON UPDATE CASCADE;
+
 ALTER TABLE pertarungan ADD CONSTRAINT fk_pertarungan_arena
 FOREIGN KEY (arena_id) REFERENCES Arena(arena_id)
+ON DELETE RESTRICT
+ON UPDATE RESTRICT;
+
+ALTER TABLE kartudeck ADD CONSTRAINT fk_kartudeck_kartu
+FOREIGN KEY (kartu_id) REFERENCES Kartu(kartu_id)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+
+ALTER TABLE pertarungan ADD CONSTRAINT fk_pertarungan_deck1
+FOREIGN KEY (akun1_id, nomor_slot_akun1) REFERENCES Deck(akun_id, nomor_slot)
+ON DELETE RESTRICT
+ON UPDATE RESTRICT;
+
+ALTER TABLE pertarungan ADD CONSTRAINT fk_pertarungan_deck2
+FOREIGN KEY (akun2_id, nomor_slot_akun2) REFERENCES Deck(akun_id, nomor_slot)
 ON DELETE RESTRICT
 ON UPDATE RESTRICT;
 
